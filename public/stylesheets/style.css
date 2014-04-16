@@ -1,0 +1,29 @@
+body {
+  padding: 60px;
+  font: 14px arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.image {
+  overflow: hidden;
+  padding: 30px;
+  width: 750px;
+  margin-top: 30px;
+  border-radius: 15px;
+  border: 1px solid lightblue;
+  max-height: 700px;
+}
+
+.my-image {
+}
+
+.buttons {
+  margin: 10px;
+}
+
+.my-button {
+  margin-right: 5px;
+}
