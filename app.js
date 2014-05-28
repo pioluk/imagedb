@@ -1,24 +1,25 @@
-var express = require('express'),
-    path = require('path'),
-    favicon = require('static-favicon'),
-    logger = require('morgan'),
+var express      = require('express'),
+    path         = require('path'),
+    favicon      = require('static-favicon'),
+    logger       = require('morgan'),
     cookieParser = require('cookie-parser'),
-    bodyParser = require('body-parser'),
-    mongoose = require('mongoose');
+    bodyParser   = require('body-parser'),
+    mongoose     = require('mongoose');
 
 var Image = require('./models/image');
 
-var routes = require('./routes/index');
-var add = require('./routes/add');
+var get    = require('./routes/get');
+var add    = require('./routes/add');
 var remove = require('./routes/remove');
 var update = require('./routes/update');
+var front  = require('./routes/front');
 
 var app = express();
 
 mongoose.connect('mongodb://localhost/images');
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+// app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(favicon());
@@ -28,10 +29,11 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/add', add);
-app.use('/remove', remove);
-app.use('/update', update);
+app.use('/api/images', get);
+app.use('/api/images', add);
+app.use('/api/images', update);
+app.use('/api/images', remove);
+app.use('*', front);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
@@ -63,6 +65,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;

@@ -3,19 +3,21 @@ var router = express.Router();
 var Image = require('./../models/image');
 
 router.post('/', function(req, res) {
-  var image = new Image({
-    slug: req.body.image_slug ||  parseInt(Math.random() * 10e12).toString(16),
-    title: req.body.image_title || 'undefined',
-    url: req.body.image_url
-  });
-
-  image.save(function(err) {
+  Image.create({
+    title: req.body.title || 'undefined',
+    url: req.body.url || 'no url'
+  }, function(err, image) {
     if (err) {
       throw err;
     }
-    else {
-      res.redirect('/');
-    }
+
+    Image.find().sort('-createdAt').exec(function(err, images) {
+      if (err) {
+        console.error(err);
+      }
+
+      res.json(images);
+    });
   });
 });
 

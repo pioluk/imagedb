@@ -10,7 +10,7 @@ a {
 .image {
   overflow: hidden;
   padding: 30px;
-  width: 750px;
+  max-width: 650px;
   margin-top: 30px;
   border-radius: 15px;
   border: 1px solid lightblue;

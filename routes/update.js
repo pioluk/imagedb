@@ -2,32 +2,38 @@ var express = require('express');
 var router = express.Router();
 var Image = require('./../models/image');
 
-router.post('/:slug', function(req, res) {
-  var title = req.body.image_title;
-  var url = req.body.image_url;
+router.put('/:id', function(req, res) {
+  var title = req.body.title;
+  var url = req.body.url;
 
-  Image.findOne({slug: req.params.slug}, function(err, image) {
+  Image.findOne({_id: req.params.id}, function(err, image) {
     if (err)
       throw err;
 
-    console.log(title);
-    console.log(url);
-
-    if (title)
+    if (title) {
       image.title = title;
-    else
+    }
+    else {
       image.title = image.title;
+    }
 
     if (url)
       image.url = url;
     else
       image.url = image.url;
 
-    image.save(function(err2) {
-      if (err2)
-        console.error(err2);
+    image.save(function(err) {
+      if (err)
+        console.error(err);
 
-      res.redirect('/');
+      Image.find().sort('-createdAt').exec(function(err, images) {
+        if (err) {
+          console.error(err);
+          return next(err);
+        }
+
+        res.json(images);
+      });
     });
   });
 });

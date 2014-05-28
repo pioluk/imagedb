@@ -1,0 +1,22 @@
+{
+  "name": "imagedb",
+  "version": "0.0.2",
+  "homepage": "https://github.com/pioluk/imagedb",
+  "authors": [
+    "Piotr Łukomiak <cieplak32@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.16",
+    "angular-route": "~1.2.16",
+    "bootstrap": "~3.1.1"
+  }
+}
